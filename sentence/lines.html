@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+ <meta charset="utf-8">
+    <title>せりふのはきだめ</title>
+    <link rel="stylesheet" href="./lines_pagestyle.css">
+</head>
+
+</body>
+    <div id = "title">せりふのはきだめ</div>
+    <hr>
+<div class="intro">
+    <p>ほら、はやく書きましょうよ、忘れちゃいますよ！<br>思い立ったら書くんです！</p>
+</div>
+<hr>
+
+<div class="input-area">
+
+  <textarea id="newlines" type="text" placeholder="なんか思いついたか？"></textarea>
+  <button id="addButton" onclick="AddPressed()">追加ッッッ</button>
+</div>
+
+<table id="result"></table>
+
+<script>
+let tasks =[];
+function AddPressed() {
+  const newlines = document.getElementById('newlines');
+  //no tasks
+  if (newlines.value === '') {
+    return;
+  }
+  //add task
+  tasks.push(newlines.value);
+  //clear input
+  newlines.value = '';
+  //redraw
+  draw();
+
+}
+
+function draw() {
+  let result = '';
+
+
+
+  for (let i = 0; i < tasks.length; i++) {
+    //change \n to <br> for display
+    tasks[i] = tasks[i].replace(/\n/g, "<br>");
+    result += "<tr>\n" + 
+              `<td id="taskElement">${tasks[i]}</td>\n` + 
+              `<td><button id="deleteButton" onclick="deletelines(${i})">やっぱなし</button></td>\n` + 
+              "</tr>";
+  }
+  
+  document.getElementById('result').innerHTML = result;}
+
+function deletelines(index) {
+  tasks.splice(index, 1);
+  draw();
+}
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html> 
+
+<head>
+    <meta charset="utf-8">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+
+<body>
+<div id="todo-list">
+    <h2>Todo List</h2>
+</div>
+
+<div id="newTask">
+    <input id="newTask" type="text" placeholder="Enter a new task">
+    <button id="addButton" onclick="AddPressed()">Add Task</button>
+
+    </div>
+
+    <table id="result"></table>
+        
+
+
+<script>
+    
+    let tasks = [];
+
+
+ const newTask = document.getElementById('newTask');
+    const value = newTask.value;
+
+
+
+        if (newTask.value === ''){
+            return;
+        }
+
+    function draw(){
+        let result ='';
+        
+        for (let i = 0; i < tasks.length;i++){
+            result += "<tr>\n"+
+                      `<td id="taskElement">${tasks[i]}</td>\n`+
+                      `<td><button onclick="deleteTask(${i})">Delete</button></td>\n`+
+                      "</tr>";
+            }
+    
+            document.getElementById('result').innerHTML=result;
+
+        }
+
+    function AddPressed(){
+        
+        alert('ボタンが押されました');
+        
+        const newTask = document.getElementById('newTask');
+        if (newTask.value === '');
+        return;
+
+        tasks.push(newTask.value);
+        newTask.value='';
+        draw();
+    }
+
+    function deleteTask(index){
+        tasks.splice(index,1);
+        draw();
+    }
+
+   
+
+</script>
+    
+
+
+
+</body>
+
+</html>

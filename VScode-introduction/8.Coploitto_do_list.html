@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<h2>Todo List</h2>
+
+<input id="taskInput" type="text" placeholder="Enter a new task">
+<button onclick="AddPressed()">Add Task</button>
+
+<table id="result"></table>
+
+<script>
+    let tasks = [];
+
+    function AddPressed() {
+        const newTask = document.getElementById('taskInput');
+        if (newTask.value === '') return;
+
+        tasks.push(newTask.value);
+        newTask.value = '';
+        draw();
+    }
+
+    function draw() {
+        let result = '';
+
+        for (let i = 0; i < tasks.length; i++) {
+            result +=
+                "<tr>" +
+                `<td>${tasks[i]}</td>` +
+                `<td><button onclick="deleteTask(${i})">Delete</button></td>` +
+                "</tr>";
+        }
+
+        document.getElementById('result').innerHTML = result;
+    }
+
+    function deleteTask(index) {
+        tasks.splice(index, 1);
+        draw();
+    }
+</script>
+
+</body>
+</html>

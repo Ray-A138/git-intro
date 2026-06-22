@@ -1,0 +1,67 @@
+<html>
+
+<head>
+ <meta charset="utf-8">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="./todolist.css">
+</head>
+
+</body>
+
+    <div id = "title">ToDo List</div>
+    <hr>
+<p>ほら、はやく書きましょうよ、やることはたくさんあるじゃあないですか。<br>遅すぎますよ、始めるのが＿＿＿＿＿＿＿＿＿＿＿＿＿。</p>
+<hr>
+<p>ほら、<a href="https://agulms45.aim.aoyama.ac.jp/my/" target="_blank">Moodleのダッシュボード</a>だぞ。さっさと片付けな、亀さんがゴールしちまう前にな。</p>
+
+<div class="input-area">
+  <input id="newTask" type="text" placeholder="Enter a new task"></input>
+  <button id="addButton" onclick="AddPressed()">Add task</button>
+</div>
+
+<table id="result"></table>
+
+<script>
+  let tasks =[];
+function AddPressed() {
+  const newTask = document.getElementById('newTask');
+  //no tasks
+  if (newTask.value === '') {
+    return;
+  }
+  //add task
+  tasks.push(newTask.value);
+  //clear input
+  newTask.value = '';
+  //redraw
+  draw();
+
+}
+
+function draw() {
+  let result = '';
+
+
+
+  for (let i = 0; i < tasks.length; i++) {
+    result += "<tr>\n" + 
+              `<td id="taskElement">${tasks[i]}</td>\n` + 
+              `<td><button onclick="deleteTask(${i})">Delete</button></td>\n` + 
+              "</tr>";
+  }
+  
+  document.getElementById('result').innerHTML = result;}
+
+function deleteTask(index) {
+  tasks.splice(index, 1);
+  draw();
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>
